@@ -9,7 +9,7 @@ Deface::Override.new(
   :virtual_path => "spree/admin/users/index",
   :name => "store_credits_admin_users_index_row_actions",
   :insert_bottom => "[data-hook='admin_users_index_row_actions']",
-  :text => "&nbsp;<%= link_to_with_icon('add', t('add_store_credit'), new_admin_user_store_credit_url(user)) %>",
+  :text => "<br /><%= link_to_with_icon('add', t('add_store_credit'), new_admin_user_store_credit_url(user)) %><br /><%= link_to_with_icon('add', t('show_store_credits_history'), history_admin_store_credit_path(user)) %>",
   :disabled => false)
 
 # Deface::Override.new(
