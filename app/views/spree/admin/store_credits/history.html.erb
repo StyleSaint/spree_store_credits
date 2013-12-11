@@ -1,0 +1,38 @@
+<%= render :partial => 'spree/admin/shared/configuration_menu' %>
+
+<h1 class="page-title "> <%= t("listing_store_credits_history") %></h1><br>
+<p>Current User: <%= link_to @user.email, admin_user_url(@user) if @user.present? %></p><br>
+<% if @user_store_credits %>
+<table class="index">
+  <thead>
+  <tr>
+    <th><%= t("amount") %></th>
+    <th><%= t("remaining_amount") %></th>
+    <th><%= t("reason") %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @user_store_credits.each do |store_credit|%>
+      <tr id="<%= dom_id store_credit %>">
+        <td><%= number_to_currency store_credit.amount %></td>
+        <td><%= number_to_currency store_credit.remaining_amount %></td>
+        <td><%= store_credit.reason %></td>
+        <td class="actions">
+          <% if store_credit.remaining_amount > 0 %>
+              <% if store_credit.amount == store_credit.remaining_amount %>
+                  <%= link_to_edit store_credit, :no_text => true %> &nbsp;
+              <% else %>
+                  <%= t(:was_partially_used) %>
+              <% end %>
+              <%= link_to_delete store_credit, :no_text => true %>
+          <% else %>
+              <%= t(:was_fully_used) %>
+          <% end %>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<% else %>
+    <p>No record was found.</p><br>
+<% end %>
