@@ -60,6 +60,8 @@ Spree::Order.class_eval do
       else
         # create adjustment off association to prevent reload
         sca = adjustments.store_credits.create(:label => I18n.t(:store_credit) , :amount => -(@store_credit_amount))
+        sca.originator_type = 'Spree::StoreCredit'
+        sca.save
       end
     end
 
